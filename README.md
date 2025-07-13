@@ -30,7 +30,7 @@ cd frontend && npm run dev
 git push origin vercel-prod
 
 ## push demo data
-  curl -X POST https://z-letly.vercel.app//api/seed-demo
+  curl -X POST https://z-letly.vercel.app/api/seed-demo
 
 
 vercel
@@ -44,10 +44,10 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 
 # After deployment, seed demo data
-curl -X POST https://your-domain.vercel.app/api/seed-demo
+curl -X POST https://z-letly.vercel.app/api/seed-demo
 
 # Test login
-curl -X POST https://your-domain.vercel.app/api/auth/login \
+curl -X POST https://z-letly.vercel.app/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"demo@landlord.com","password":"demo123"}'  
 

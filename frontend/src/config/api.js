@@ -6,7 +6,7 @@ const API_CONFIG = {
   },
   // Production environment
   production: {
-    baseURL: '' // Will use same domain as frontend
+    baseURL: 'https://z-letly.vercel.app' // Will use same domain as frontend
   }
 };
 
