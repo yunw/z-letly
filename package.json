@@ -18,7 +18,6 @@
     "clean:api": "cd api && rm -rf node_modules",
     "clean:all": "npm run clean && rm -rf node_modules && cd backend && rm -rf node_modules",
     "preview": "cd frontend && npm run preview",
-    "deploy": "npm run build && vercel --prod",
     "deploy:frontend": "cd frontend && npm run build && vercel --prod",
     "deploy:api": "vercel --prod",
     "seed": "cd api && npm run seed",
@@ -29,7 +28,7 @@
     "start": "npm run dev",
     "lint": "npm run lint:frontend && npm run lint:api",
     "lint:frontend": "cd frontend && npm run lint",
-    "lint:api": "cd api && npm run lint",
+    "lint:api": "cd frontend && npm run lint",
     "format": "npm run format:frontend && npm run format:api",
     "format:frontend": "cd frontend && npm run format",
     "format:api": "cd api && npm run format"
