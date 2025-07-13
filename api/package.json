@@ -1,0 +1,20 @@
+{
+  "name": "z-letly-api",
+  "version": "1.0.0",
+  "description": "z-Letly API for Vercel serverless functions",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seed-demo-data.js"
+  },
+  "keywords": ["vercel", "serverless", "api"],
+  "author": "",
+  "license": "ISC"
+} 

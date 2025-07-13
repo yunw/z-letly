@@ -221,23 +221,50 @@ The application is fully functional with MongoDB Atlas. All data is persisted in
 
 **Status**: ✅ **Production Ready** - MongoDB Atlas integrated with persistent data storage and beautiful modern UI!
 
-## DDB info
-zendari2025/QKVU4RBqjfnGloBX
-
-
-mongodb+srv://zendari2025:QKVU4RBqjfnGloBX@letly0.hxi7qqy.mongodb.net/
-
-DB data management:
-https://cloud.mongodb.com/v2/686ab7369a861d713f1344cf#/explorer/686ab7a788c58f7aade965db/zletly/users/indexes
 
 
 
-### 
-Demo Credentials:
-Landlord: landlord@test.com / password123
-Rentee: rentee@test.com / password123
+### 📋 Demo Credentials
+**After deployment, seed demo data using:**
+```bash
+# Option 1: Using curl (replace with your Vercel URL)
+curl -X POST https://your-app.vercel.app/api/seed-demo
 
-## start frontend & backend
+# Option 2: Using the demo data script
+cd api && node seed-demo-data.js
+```
+
+**Demo Credentials:**
+- **Landlord**: landlord@test.com / password123
+- **Rentee**: rentee@test.com / password123
+
+**Demo Property**: Demo Apartment Complex
+**Monthly Rent**: $1,500 + $300 utilities = $1,800
+
+## 🚀 Quick Start
+
+### Development
+```bash
+# Start frontend (development)
 cd frontend && npm run dev
-cd backend && node app.js? 
-cd backend && npm start?? 
+
+# Start backend (development)
+cd backend && npm start
+```
+
+### Production Deployment
+<!-- Your backend is deployed at: `https://letly-ouqc.onrender.com/` -->
+
+To deploy the frontend:
+```bash
+# Build for production
+cd frontend && npm run build
+
+# Deploy to Vercel (recommended)
+vercel --prod
+
+# Or deploy to Netlify
+# Upload the dist/ folder to Netlify dashboard
+```
+
+See `DEPLOYMENT_GUIDE.md` for detailed deployment instructions.

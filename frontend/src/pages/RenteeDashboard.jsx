@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { buildApiUrl } from '../config/api';
 import {
   AppBar,
   Toolbar,
@@ -55,7 +56,7 @@ const RenteeDashboard = () => {
 
   const fetchBills = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/bills/tenant', {
+      const response = await fetch(buildApiUrl('/api/bills/tenant'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -69,7 +70,7 @@ const RenteeDashboard = () => {
 
   const fetchSummary = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/bills/summary', {
+      const response = await fetch(buildApiUrl('/api/bills/summary'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -83,7 +84,7 @@ const RenteeDashboard = () => {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/properties/rentee', {
+      const response = await fetch(buildApiUrl('/api/properties/rentee'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -99,7 +100,7 @@ const RenteeDashboard = () => {
 
   const fetchMaintenanceRequests = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/maintenance/rentee', {
+      const response = await fetch(buildApiUrl('/api/maintenance/rentee'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -113,7 +114,7 @@ const RenteeDashboard = () => {
 
   const markBillPaid = async (billId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/bills/${billId}/paid`, {
+      const response = await fetch(buildApiUrl(`/api/bills/${billId}/paid`), {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -133,7 +134,7 @@ const RenteeDashboard = () => {
     e.preventDefault();
     setAddRequestError('');
     try {
-      const response = await fetch('http://localhost:8080/api/maintenance', {
+      const response = await fetch(buildApiUrl('/api/maintenance'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

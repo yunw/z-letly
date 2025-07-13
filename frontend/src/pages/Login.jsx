@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { buildApiUrl } from '../config/api';
 import {
   Box,
   Paper,
@@ -81,7 +82,7 @@ const Login = () => {
     setForgotPasswordSuccess('');
 
     try {
-      const response = await fetch('http://localhost:8080/api/password-reset/request', {
+      const response = await fetch(buildApiUrl('/api/password-reset/request'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

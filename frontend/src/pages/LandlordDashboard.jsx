@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { buildApiUrl } from '../config/api';
 import {
   AppBar,
   Toolbar,
@@ -108,7 +109,7 @@ const LandlordDashboard = () => {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/properties/landlord', {
+      const response = await fetch(buildApiUrl('/api/properties/landlord'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -122,7 +123,7 @@ const LandlordDashboard = () => {
 
   const fetchBills = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/bills/landlord', {
+      const response = await fetch(buildApiUrl('/api/bills/landlord'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -138,7 +139,7 @@ const LandlordDashboard = () => {
 
   const fetchMaintenanceRequests = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/maintenance/landlord', {
+      const response = await fetch(buildApiUrl('/api/maintenance/landlord'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -164,7 +165,7 @@ const LandlordDashboard = () => {
     e.preventDefault();
     setMaintenanceUpdateError("");
     try {
-      const response = await fetch(`http://localhost:8080/api/maintenance/${selectedMaintenanceRequest._id}/status`, {
+      const response = await fetch(buildApiUrl(`/api/maintenance/${selectedMaintenanceRequest._id}/status`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -220,7 +221,7 @@ const LandlordDashboard = () => {
         ...newProperty,
         rentAmount: Number(newProperty.rentAmount),
       };
-      const response = await fetch('http://localhost:8080/api/properties', {
+      const response = await fetch(buildApiUrl('/api/properties'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -247,7 +248,7 @@ const LandlordDashboard = () => {
     e.preventDefault();
     setAddTenantError("");
     try {
-      const response = await fetch('http://localhost:8080/api/properties/add-tenant', {
+      const response = await fetch(buildApiUrl('/api/properties/add-tenant'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -281,7 +282,7 @@ const LandlordDashboard = () => {
 
     setRemoveTenantError("");
     try {
-      const response = await fetch(`http://localhost:8080/api/properties/${propertyId}/tenants/${tenantId}`, {
+      const response = await fetch(buildApiUrl(`/api/properties/${propertyId}/tenants/${tenantId}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -472,7 +473,7 @@ const LandlordDashboard = () => {
         ...editingProperty,
         rentAmount: Number(editingProperty.rentAmount),
       };
-      const response = await fetch(`http://localhost:8080/api/properties/${editingProperty._id}`, {
+      const response = await fetch(buildApiUrl(`/api/properties/${editingProperty._id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -515,7 +516,7 @@ const LandlordDashboard = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/bills/generate', {
+      const response = await fetch(buildApiUrl('/api/bills/generate'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
