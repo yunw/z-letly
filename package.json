@@ -7,15 +7,41 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm start",
-    "build": "cd frontend && npm run build",
-    "deploy": "vercel --prod",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:api": "vercel dev",
+    "build": "npm run build:frontend && npm run build:api",
+    "build:frontend": "cd frontend && npm run build",
+    "build:api": "echo 'API is serverless - no build needed'",
+    "build:all": "npm run install:all && npm run build",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ../api && npm install",
+    "clean": "npm run clean:frontend && npm run clean:api",
+    "clean:frontend": "cd frontend && rm -rf dist node_modules",
+    "clean:api": "cd api && rm -rf node_modules",
+    "clean:all": "npm run clean && rm -rf node_modules && cd backend && rm -rf node_modules",
+    "preview": "cd frontend && npm run preview",
+    "deploy": "npm run build && vercel --prod",
+    "deploy:frontend": "cd frontend && npm run build && vercel --prod",
+    "deploy:api": "vercel --prod",
+    "seed": "cd api && npm run seed",
+    "seed:demo": "curl -X POST https://your-app.vercel.app/api/seed-demo",
+    "test": "npm run test:frontend && npm run test:api",
+    "test:frontend": "cd frontend && npm test",
+    "test:api": "cd api && npm test",
+    "start": "npm run dev",
+    "lint": "npm run lint:frontend && npm run lint:api",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:api": "cd api && npm run lint",
+    "format": "npm run format:frontend && npm run format:api",
+    "format:frontend": "cd frontend && npm run format",
+    "format:api": "cd api && npm run format"
   },
-  "keywords": ["property-management", "bills", "landlord", "rentee"],
+  "keywords": ["property-management", "bills", "landlord", "rentee", "vercel", "serverless"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }
