@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch(buildApiUrl('/api/auth/me'), {
+      const response = await fetch(buildApiUrl('/api/auth?action=me'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch(buildApiUrl('/api/auth/login'), {
+      const response = await fetch(buildApiUrl('/api/auth?action=login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch(buildApiUrl('/api/auth/register'), {
+      const response = await fetch(buildApiUrl('/api/auth?action=register'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -6,8 +6,10 @@ import { User } from '../lib/models.js';
 export default async function handler(req, res) {
   await dbConnect();
 
-  // /api/auth/login
-  if (req.method === 'POST' && req.url.endsWith('/login')) {
+  const { action } = req.query;
+
+  // POST /api/auth?action=login
+  if (req.method === 'POST' && action === 'login') {
     try {
       const { email, password } = req.body;
       if (!email || !password) {
@@ -42,8 +44,8 @@ export default async function handler(req, res) {
     return;
   }
 
-  // /api/auth/register
-  if (req.method === 'POST' && req.url.endsWith('/register')) {
+  // POST /api/auth?action=register
+  if (req.method === 'POST' && action === 'register') {
     try {
       const { email, password, name, role, phone } = req.body;
       if (!email || !password || !name || !role) {
@@ -81,8 +83,8 @@ export default async function handler(req, res) {
     return;
   }
 
-  // /api/auth/me
-  if (req.method === 'GET' && req.url.endsWith('/me')) {
+  // GET /api/auth?action=me
+  if (req.method === 'GET' && action === 'me') {
     try {
       const authHeader = req.headers.authorization;
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
