@@ -46,9 +46,12 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 # After deployment, seed demo data
 curl -X POST https://z-letly.vercel.app/api/seed-demo
 
-# Test login
-curl -X POST https://z-letly.vercel.app/api/auth/login \
+# Register
+curl -X POST "https://z-letly.vercel.app/api/auth?action=register" \
   -H "Content-Type: application/json" \
-  -d '{"email":"demo@landlord.com","password":"demo123"}'  
+  -d '{"email":"testuser2@example.com","password":"testpass123","name":"Test User2","role":"rentee"}'
 
-
+# Login
+curl -X POST "https://z-letly.vercel.app/api/auth?action=login" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"testuser2@example.com","password":"testpass123"}'
