@@ -7,12 +7,19 @@
   "dependencies": {
     "mongoose": "^7.0.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seed-demo-data.js"
+    "seed": "node seed-demo-data.js",
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js"
   },
   "keywords": ["vercel", "serverless", "api"],
   "author": "",
