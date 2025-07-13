@@ -25,10 +25,13 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      maxPoolSize: 10,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-      family: 4
+      maxPoolSize: 1,
+      minPoolSize: 0,
+      serverSelectionTimeoutMS: 3000,
+      socketTimeoutMS: 10000,
+      connectTimeoutMS: 3000,
+      family: 4,
+      keepAlive: false
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
@@ -36,6 +39,7 @@ async function dbConnect() {
       return mongoose;
     }).catch((error) => {
       console.error('MongoDB connection error:', error);
+      cached.promise = null;
       throw error;
     });
   }
