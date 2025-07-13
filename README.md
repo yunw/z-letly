@@ -27,7 +27,28 @@ curl http://localhost:3001
 cd frontend && npm run dev
 
 # Deploy to vercel
+git push origin vercel-prod
 
-  curl -X POST https://your-vercel-domain.vercel.app/api/seed-demo
+## push demo data
+  curl -X POST https://z-letly.vercel.app//api/seed-demo
+
+
+vercel
+
+# random generate the JWT_SECRET
+# On Mac/Linux:
+openssl rand -base64 32
+
+# Or, using Node.js:
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+
+# After deployment, seed demo data
+curl -X POST https://your-domain.vercel.app/api/seed-demo
+
+# Test login
+curl -X POST https://your-domain.vercel.app/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"demo@landlord.com","password":"demo123"}'  
 
 
