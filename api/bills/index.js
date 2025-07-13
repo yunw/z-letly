@@ -17,6 +17,44 @@ export default async function handler(req, res) {
     await dbConnect();
     const decoded = verifyToken(req);
 
+    // Handle /api/bills/summary (GET)
+    if (req.method === 'GET' && req.url.endsWith('/summary')) {
+      // Get bills for the user
+      const bills = await Bill.find({ tenant: decoded.userId });
+      // Calculate summary
+      const summary = {
+        totalBills: bills.length,
+        paidBills: bills.filter(bill => bill.status === 'paid').length,
+        pendingBills: bills.filter(bill => bill.status === 'pending').length,
+        overdueBills: bills.filter(bill => bill.status === 'overdue').length,
+        totalAmount: bills.reduce((sum, bill) => sum + bill.amount, 0),
+        paidAmount: bills.filter(bill => bill.status === 'paid').reduce((sum, bill) => sum + bill.amount, 0),
+        pendingAmount: bills.filter(bill => bill.status === 'pending').reduce((sum, bill) => sum + bill.amount, 0)
+      };
+      return res.status(200).json({ summary });
+    }
+
+    // Handle /api/bills/[id]/paid (PUT)
+    const paidMatch = req.url.match(/\/([a-fA-F0-9]{24})\/paid$/);
+    if (req.method === 'PUT' && paidMatch) {
+      const id = paidMatch[1];
+      // Find and update bill
+      const bill = await Bill.findById(id);
+      if (!bill) {
+        return res.status(404).json({ message: 'Bill not found' });
+      }
+      // Check if user is the tenant of this bill
+      if (bill.tenant.toString() !== decoded.userId) {
+        return res.status(403).json({ message: 'Not authorized to update this bill' });
+      }
+      // Update bill status
+      bill.status = 'paid';
+      bill.paidAt = new Date();
+      await bill.save();
+      return res.status(200).json({ message: 'Bill marked as paid successfully', bill });
+    }
+
+    // Main bills logic
     switch (req.method) {
       case 'POST':
         return await generateBills(req, res, decoded);
@@ -29,6 +67,9 @@ export default async function handler(req, res) {
     console.error('Bills API error:', error);
     if (error.message === 'No token provided') {
       return res.status(401).json({ message: error.message });
+    }
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token' });
     }
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -77,7 +118,6 @@ async function generateBills(req, res, decoded) {
       month,
       splitPercentage: 100 / property.tenants.length
     });
-
     bills.push(bill);
   }
 
