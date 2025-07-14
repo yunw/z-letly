@@ -11,7 +11,7 @@ const API_CONFIG = {
 };
 
 // Get current environment
-const environment = import.meta.env.MODE || 'development';
+const environment = import.meta.env.MODE || 'production';
 
 // Export the base URL for the current environment
 export const API_BASE_URL = API_CONFIG[environment]?.baseURL || API_CONFIG.development.baseURL;
