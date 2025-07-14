@@ -14,7 +14,10 @@ const API_CONFIG = {
 const environment = import.meta.env.MODE || 'production';
 
 // Export the base URL for the current environment
-export const API_BASE_URL = API_CONFIG[environment]?.baseURL || API_CONFIG.development.baseURL;
+// export const API_BASE_URL = API_CONFIG[environment]?.baseURL || API_CONFIG.development.baseURL;
+export const API_BASE_URL = API_CONFIG[environment]?.baseURL ?? API_CONFIG.development.baseURL;
+
+
 console.log('ENV MODE:', import.meta.env.MODE, 'API_BASE_URL:', API_BASE_URL);
 
 // Helper function to build full API URLs
