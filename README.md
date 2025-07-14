@@ -1,5 +1,10 @@
+####
+TODO:
+1. MongoDB whitelist or integration (blocked, the job cannot complete); LOW Priority. the cred is in MDB Console ENV VAR; 
 
-#
+
+
+####
 TWO different backend setups:
 backend/ directory - Traditional Express.js server (for Render) ## to be decommissioned
 api/ directory - Vercel serverless functions (for Vercel)

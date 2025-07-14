@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+console.log('[MONGODB DEBUG] MONGODB_URI:', MONGODB_URI);
+console.log('[MONGODB DEBUG] JWT_SECRET:', JWT_SECRET);
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env');
@@ -25,32 +29,18 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      maxPoolSize: 1,
-      minPoolSize: 0,
-      serverSelectionTimeoutMS: 3000,
-      socketTimeoutMS: 10000,
-      connectTimeoutMS: 3000,
-      family: 4,
-      keepAlive: false
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('MongoDB connected successfully');
       return mongoose;
-    }).catch((error) => {
-      console.error('MongoDB connection error:', error);
-      cached.promise = null;
-      throw error;
     });
   }
-  
-  try {
-    cached.conn = await cached.promise;
-    return cached.conn;
-  } catch (error) {
-    cached.promise = null;
-    throw error;
-  }
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
 
 export default dbConnect; 
