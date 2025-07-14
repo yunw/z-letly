@@ -8,7 +8,7 @@
     }
   },
   "env": {
-    "MONGODB_URI": "mongodb+srv://zendari2025:QKVU4RBqjfnGloBX@letly0.hxi7qqy.mongodb.net/zletly",
+    "MONGODB_URI": "mongodb+srv://z-letly:9KGnitd#KLJ$_Z8@letly0.hxi7qqy.mongodb.net/zletly",
     "JWT_SECRET": "QKVU4RBqjfnGloBX7v8k2J3l5n8p0s2d3f4g5h6j7k8l9m0n"
   }
 } 
